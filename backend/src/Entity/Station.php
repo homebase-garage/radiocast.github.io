@@ -499,7 +499,12 @@ final class Station implements Stringable, IdentifiableEntityInterface
         Serializer\Groups([EntityGroupsInterface::GROUP_ADMIN, EntityGroupsInterface::GROUP_ALL])
     ]
     public StorageLocation $media_storage_location {
-        set {
+        // @phpstan-ignore propertySetHook.noAssign
+        set(StorageLocation|null $value) {
+            if (null === $value) {
+                return;
+            }
+
             if (StorageLocationTypes::StationMedia !== $value->type) {
                 throw new RuntimeException('Invalid storage location.');
             }
@@ -521,7 +526,12 @@ final class Station implements Stringable, IdentifiableEntityInterface
         Serializer\Groups([EntityGroupsInterface::GROUP_ADMIN, EntityGroupsInterface::GROUP_ALL])
     ]
     public StorageLocation $recordings_storage_location {
-        set {
+        // @phpstan-ignore propertySetHook.noAssign
+        set(StorageLocation|null $value) {
+            if (null === $value) {
+                return;
+            }
+
             if (StorageLocationTypes::StationRecordings !== $value->type) {
                 throw new RuntimeException('Invalid storage location.');
             }
@@ -543,10 +553,12 @@ final class Station implements Stringable, IdentifiableEntityInterface
         Serializer\Groups([EntityGroupsInterface::GROUP_ADMIN, EntityGroupsInterface::GROUP_ALL])
     ]
     public StorageLocation $podcasts_storage_location {
-        get {
-            return $this->podcasts_storage_location;
-        }
-        set {
+        // @phpstan-ignore propertySetHook.noAssign
+        set(StorageLocation|null $value) {
+            if (null === $value) {
+                return;
+            }
+
             if (StorageLocationTypes::StationPodcasts !== $value->type) {
                 throw new RuntimeException('Invalid storage location.');
             }
@@ -636,9 +648,11 @@ final class Station implements Stringable, IdentifiableEntityInterface
 
     public function __construct()
     {
-        $this->frontend_config_raw = new StationFrontendConfiguration([])->toArray();
-        $this->backend_config_raw = new StationBackendConfiguration([])->toArray();
-        $this->branding_config_raw = new StationBrandingConfiguration([])->toArray();
+        $this->generateAdapterApiKey();
+
+        $this->frontend_config_raw = new StationFrontendConfiguration([])->getData();
+        $this->backend_config_raw = new StationBackendConfiguration([])->getData();
+        $this->branding_config_raw = new StationBrandingConfiguration([])->getData();
 
         $this->frontend_type = FrontendAdapters::default();
         $this->backend_type = BackendAdapters::default();
