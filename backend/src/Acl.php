@@ -69,7 +69,7 @@ final class Acl
         foreach ($sql->toIterable() as $row) {
             $actions[$row['role_id']] ??= [
                 'stations' => [],
-                'global' => []
+                'global' => [],
             ];
 
             if ($row['station_id']) {
