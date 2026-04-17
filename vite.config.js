@@ -39,12 +39,22 @@ export default defineConfig({
         rollupOptions: {
             input: inputs,
             output: {
-                manualChunks: {
-                    vue: ['vue'],
-                    estoolkit: ['es-toolkit'],
-                    leaflet: ['leaflet'],
-                    hlsjs: ['hls.js'],
-                    zxcvbn: ['zxcvbn'],
+                manualChunks(id) {
+                    if (id.includes('node_modules/vue')) {
+                        return 'vue';
+                    }
+                    if (id.includes('node_modules/es-toolkit')) {
+                        return 'estoolkit';
+                    }
+                    if (id.includes('node_modules/leaflet')) {
+                        return 'leaflet';
+                    }
+                    if (id.includes('node_modules/hls.js')) {
+                        return 'hlsjs';
+                    }
+                    if (id.includes('node_modules/zxcvbn')) {
+                        return 'zxcvbn';
+                    }
                 },
                 chunkFileNames: (assetInfo) => {
                     // Special handling for translations
@@ -101,7 +111,7 @@ export default defineConfig({
         },
         manifest: true,
         emptyOutDir: true,
-        chunkSizeWarningLimit: '1m',
+        chunkSizeWarningLimit: 1000,
         outDir: resolve(__dirname, './web/static/vite_dist')
     },
     css: {
