@@ -112,7 +112,8 @@ export default defineConfig({
         manifest: true,
         emptyOutDir: true,
         chunkSizeWarningLimit: 1000,
-        outDir: resolve(__dirname, './web/static/vite_dist')
+        outDir: resolve(__dirname, './web/static/vite_dist'),
+        strictExecutionOrder: true
     },
     css: {
         preprocessorOptions: {
