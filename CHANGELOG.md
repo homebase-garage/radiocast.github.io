@@ -9,6 +9,10 @@ release channel, you can take advantage of these new features and fixes.
 
 ## Bug Fixes
 
+- The e-mail sent by the "Reset Password" function will now always use the "Base URL" configured in system settings,
+  instead of respecting the "Prefer Browser URL" setting, to avoid potential security hazards. You should always ensure
+  the "Base URL" system setting is configured correctly to avoid directing users to the wrong URL.
+
 ---
 
 # AzuraCast 0.23.5 (Apr 20, 2026)
