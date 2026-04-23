@@ -7,11 +7,15 @@ release channel, you can take advantage of these new features and fixes.
 
 ## Code Quality/Technical Changes
 
-## Bug Fixes
+- Improved the security for local media uploads to prevent intentional path traversal outside the station's media 
+  directory. This vulnerability only affected already logged-in users with permissions and did not allow anonymous
+  users to upload media at any point.
 
 - The e-mail sent by the "Reset Password" function will now always use the "Base URL" configured in system settings,
   instead of respecting the "Prefer Browser URL" setting, to avoid potential security hazards. You should always ensure
   the "Base URL" system setting is configured correctly to avoid directing users to the wrong URL.
+
+## Bug Fixes
 
 ---
 
