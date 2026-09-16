@@ -10071,6 +10071,10 @@ components:
           type: integer
         use_manual_autodj:
           type: boolean
+        reset_sequential_queues_on_restart:
+          description: 'Reset the internal queue of sequential playlists when the station is restarted or its configuration is rewritten.'
+          type: boolean
+          example: false
         autodj_queue_length:
           type: integer
         dj_mount_point:
@@ -10408,6 +10412,10 @@ components:
             avoid_duplicates:
               type: boolean
               example: true
+            preserve_queue_on_restart:
+              description: "Don't reset this playlist's queue when the station is restarted or its configuration is rewritten."
+              type: boolean
+              example: false
             schedule_items:
               type: array
               items: {}
